@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<meta charset="utf-8"/>
+<html>
+<head>
+	<title>Dashboard</title>
+	<style type="text/css">
+      #chart-container {
+        width: 640px;
+        height: auto;
+      }
+    </style>
+</head>
+
+<body>
+
+<?php
+ session_start();
+ $username = $_SESSION['username']; //retrieve the session variable
+ ?>
+
+<?php echo $_SESSION['username']; ?>
+
+ <h1>Dashboard </h1>
+ <div style="font-weight:bold"> Welcome <?php echo $username ?> </div>
+
+
+
+</body>
+</html>
