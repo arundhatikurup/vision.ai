@@ -100,7 +100,7 @@
  <div class="tab">
   <button class="tablinks" onclick="openCity(event, 'Daily')" id="defaultOpen">Daily</button>
   <button class="tablinks" onclick="openCity(event, 'Weekly')">Weekly</button>
-  <button class="tablinks" onclick="openCity(event, 'Notifications')">Notifications</button>
+  <button class="tablinks" onclick="openCity(event, 'Monthly')">Monthly</button>
   </div>
     
  	<div id="Daily" class="tabcontent">
@@ -182,9 +182,47 @@
 
 </div>	
 
-<div id="Notifications" class="tabcontent">
+<div id="Monthly" class="tabcontent">
   
-  <p>History of notifications</p> 
+  <?php
+
+	//get connection
+	$mysqli = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_NAME);
+
+	if(!$mysqli){
+  	die("Connection failed: " . $mysqli->error);
+	}
+
+	$date=date("Y-m-d");
+
+	$query = sprintf("SELECT timestamp FROM anomaly WHERE score >0.95 and month(timestamp)=3;");
+
+	$result = $mysqli->query($query);
+
+	
+	echo "<p>Anomaly reported at:</p>";
+  	
+  	$p=0;
+  	while ($row = mysqli_fetch_assoc($result)) { 
+    echo "<tr>";
+    foreach ($row as $field => $value) {  
+    {
+        echo "<td>" . $value . "</td>"; 
+    	echo "</br>";
+    	$p=$p+1;
+    }
+    echo "</tr>";
+
+}
+
+  }
+  echo "<p>Number of anomalies this month :</p>";
+  echo $p;
+
+ 	?>
+
+ 
+
 </div>	
 
 
